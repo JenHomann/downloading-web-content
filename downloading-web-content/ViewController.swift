@@ -25,10 +25,31 @@ class ViewController: UIViewController, WKUIDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        /*
         let url = URL(string: "https://www.apple.com")
         let request = URLRequest(url: url!)
         webKitView.load(request)
-//        webKitView.loadHTMLString("<h1> Hello there!</h1>", baseURL: nil)
+        webKitView.loadHTMLString("<h1> Hello there!</h1>", baseURL: )
+        */
+        
+        if let url = URL(string: "https://www.stackoverflow.com") {
+            let request = NSMutableURLRequest(url: url)
+            
+            let task = URLSession.shared.dataTask(with: request as URLRequest) {
+                data, response, error in
+                
+                if error != nil {
+                    print(error!)
+                } else {
+                    if let unwrappedData = data {
+                        let dataString = NSString(data: unwrappedData, encoding: String.Encoding.utf8.rawValue)
+                        
+                        print(dataString!)
+                    }
+                }
+            }
+            task.resume()
+        }
     }
 
     override func didReceiveMemoryWarning() {
