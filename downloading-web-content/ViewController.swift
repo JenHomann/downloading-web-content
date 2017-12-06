@@ -7,12 +7,28 @@
 //
 
 import UIKit
+import WebKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, WKUIDelegate {
+    
+    
+    @IBOutlet var webKitView: WKWebView!
+    
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webKitView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webKitView.uiDelegate = self
+        view = webKitView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let url = URL(string: "https://www.apple.com")
+        let request = URLRequest(url: url!)
+        webKitView.load(request)
+//        webKitView.loadHTMLString("<h1> Hello there!</h1>", baseURL: nil)
     }
 
     override func didReceiveMemoryWarning() {
