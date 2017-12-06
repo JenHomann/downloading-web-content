@@ -45,11 +45,17 @@ class ViewController: UIViewController, WKUIDelegate {
                         let dataString = NSString(data: unwrappedData, encoding: String.Encoding.utf8.rawValue)
                         
                         print(dataString!)
+                        
+                        DispatchQueue.main.sync(execute: {
+                            // Update UI as needed
+                        })
                     }
                 }
             }
             task.resume()
         }
+        
+        print("Hi there!")
     }
 
     override func didReceiveMemoryWarning() {
